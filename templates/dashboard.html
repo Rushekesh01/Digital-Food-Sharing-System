@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Dashboard - Food Sharing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🍱 FOOD SHARING SYSTEM</a>
+    <div>
+      <a href="index.html" class="btn nav-btn">Home</a>
+      <a href="donate.html" class="btn nav-btn">Donate</a>
+      <a href="request.html" class="btn nav-btn">Request</a>
+      <a href="available.html" class="btn nav-btn">Available Food</a>
+      <a href="/logout" class="btn btn-login">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+    <h2>Welcome, {{ session.user_name }}!</h2>
+    
+    <!-- Stats Cards -->
+    <div class="row mt-4">
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title">My Donations</h5>
+                    <h2>{{ donations_count }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">My Requests</h5>
+                    <h2>{{ requests_count }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h5 class="card-title">Active</h5>
+                    <h2>{{ active_count }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- My Donations List -->
+    <h3 class="mt-5">My Recent Donations</h3>
+    <div class="row">
+        {% for donation in my_donations %}
+        <div class="col-md-6">
+            <div class="food-card">
+                <h5>{{ donation.food_type }}</h5>
+                <p>Quantity: {{ donation.quantity }} people</p>
+                <p>Status: 
+                    <span class="badge-available">{{ donation.status }}</span>
+                </p>
+                <p>Date: {{ donation.created_at }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<footer class="mt-5">
+    © 2026 Digital Food Sharing System
+</footer>
+</body>
+</html>
